@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Markmap</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #mindmap {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/katex.min.css">
+</head>
+
+<body>
+  <svg id="mindmap"></svg>
+  <script src="./js/markmap-lib.js"></script>
+  <script src="./js/d3.min.js"></script>
+  <script src="./js/markmap-view.js"></script>
+  <script src="./js/markmap-toolbar.js"></script>
+  <script>
+    (e => {
+      window.WebFontConfig = {
+        custom: {
+          families: ["KaTeX_AMS", "KaTeX_Caligraphic:n4,n7", "KaTeX_Fraktur:n4,n7", "KaTeX_Main:n4,n7,i4,i7",
+            "KaTeX_Math:i4,i7", "KaTeX_Script", "KaTeX_SansSerif:n4,n7,i4", "KaTeX_Size1", "KaTeX_Size2",
+            "KaTeX_Size3", "KaTeX_Size4", "KaTeX_Typewriter"
+          ]
+        },
+        active: () => {
+          e().refreshHook.call()
+        }
+      }
+    })(() => window.markmap)
+  </script>
+  <script src="./js/webfontloader.js" defer></script>
+  <script>
+    (() => {
+      setTimeout(() => {
+        const {
+          markmap: q,
+          mm: v
+        } = window, j = new q.Toolbar;
+        j.attach(v);
+        console.info(v, j, q, 'vjq')
+        const we = j.render();
+        we.setAttribute("style", "position:absolute;bottom:20px;right:20px"), document.body.append(we)
+      })
+    })()
+  </script>
+  <script>
+    var data = `---
+title: markmap
+markmap:
+  colorFreezeLevel: 2
+---
+
+## Links
+
+- [Website](https://markmap.js.org/) 
+- [GitHub](https://github.com/gera2ld/markmap) 
+
+## Related Projects
+
+- [coc-markmap](https://github.com/gera2ld/coc-markmap) for Neovim
+- [markmap-vscode](https://marketplace.visualstudio.com/items?itemName=gera2ld.markmap-vscode) for VSCode
+- [eaf-markmap](https://github.com/emacs-eaf/eaf-markmap) for Emacs
+
+## Features
+
+Note that if blocks and lists appear at the same level, the lists will be ignored.
+
+### Lists
+
+- **strong** ~~del~~ *italic* ==highlight==
+- \`inline code\`
+- [x] checkbox
+- Katex: $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ <!-- markmap: fold -->
+  - [More Katex Examples](#?d=gist:af76a4c245b302206b16aec503dbe07b:katex.md)
+- Now we can wrap very very very very long text based on \maxWidth\ option
+
+### Blocks
+
+\`\`\`js
+console.log('hello, JavaScript')
+\`\`\`
+
+| Products | Price |
+|-|-|
+| Apple | 4 |
+| Banana | 2 |
+
+![](https://work.beta.duiopen.com/static/img/favicon.ico)`
+
+    function draw(h, u = {
+      "colorFreezeLevel": 2
+    }) {
+      const g = window.markmap;
+      const {
+        Transformer
+      } = window.markmap;
+      const transformer = new Transformer();
+
+      const {
+        root,
+        features
+      } = transformer.transform(h)
+      console.info(root, features, 'root, features')
+
+      window.mm = g.Markmap.create("svg#mindmap", (g.deriveOptions)(u), root)
+    }
+    draw(data)
+  </script>
+</body>
+
+</html>
