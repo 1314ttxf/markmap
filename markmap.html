@@ -102,7 +102,7 @@ console.log('hello, JavaScript')
 
 ![](https://work.beta.duiopen.com/static/img/favicon.ico)`
 
-    function draw(h, u = {
+    window.draw=function draw(h, u = {
       "colorFreezeLevel": 2
     }) {
       const g = window.markmap;
@@ -116,9 +116,10 @@ console.log('hello, JavaScript')
         features
       } = transformer.transform(h)
       console.info(root, features, 'root, features')
-
+      if (window.mm) window.mm.destroy()
       window.mm = g.Markmap.create("svg#mindmap", (g.deriveOptions)(u), root)
     }
+    
     draw(data)
   </script>
 </body>
