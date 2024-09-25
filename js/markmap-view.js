@@ -405,7 +405,11 @@
         "maxWidth",
         "initialExpandLevel",
         "fitRatio",
-        "maxInitialScale"
+        "maxInitialScale",
+        "nodeMinHeight",
+        "paddingX",
+        "spacingHorizontal",
+        "spacingVertical"
       ];
       numberKeys.forEach((key) => {
         const value = options[key];
@@ -1166,7 +1170,7 @@
     const globalCSS = css;
     function linkWidth(nodeData) {
       const data = nodeData.data;
-      return Math.max(4 - 2 * data.state.depth, 1.5);
+      return Math.max(4 - 2 * data.state.depth, 1.2);
     }
     function minBy(numbers, by) {
       const index = d32.minIndex(numbers, by);
@@ -1466,7 +1470,7 @@
           (update) => update,
           (exit) => exit.remove()
         );
-        this.transition(circle).attr("r", 6).attr("cx", (d) => d.ySize - spacingHorizontal).attr("cy", (d) => d.xSize).attr("stroke", (d) => color(d.data)).attr(
+        this.transition(circle).attr("r", 3).attr("cx", (d) => d.ySize - spacingHorizontal).attr("cy", (d) => d.xSize).attr("stroke", (d) => color(d.data)).attr(
           "fill",
           (d) => {
             var _a;
@@ -1485,7 +1489,7 @@
               const clone = d.data.state.el.cloneNode(true);
               this.replaceWith(clone);
               return clone;
-            }).attr("xmlns", "http://www.w3.org/1999/xhtml");
+            }).attr("xmlns", "http://www.w3.org/1999/xhtml").attr("style", (d) =>`color:${color(d.data)}`);
             return fo;
           },
           (update) => update,

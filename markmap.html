@@ -17,6 +17,30 @@
       width: 100vw;
       height: 100vh;
     }
+    #mindmap g[data-depth="1"]{
+      div{
+        color: #000000 !important;
+        font-weight: bold;
+      }
+    }
+    #mindmap g[data-depth="2"]{
+      div{
+        color: #000000 !important;
+        font-size: calc(1em - 2px);
+        font-weight: bold;
+      }
+    }
+    #mindmap g[data-depth="3"],#mindmap g[data-depth="4"],#mindmap g[data-depth="5"],#mindmap g[data-depth="6"]{
+      div{
+        color: #000000 !important;
+        font-size: calc(1em - 4px);
+      }
+    }
+    /* #mindmap g[data-depth="2"] .markmap-foreign{
+       y:0
+    } */
+    
+    
   </style>
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/katex.min.css">
@@ -59,51 +83,180 @@
     })()
   </script>
   <script>
-    var data = `---
-title: markmap
-markmap:
-  colorFreezeLevel: 2
----
+    var data = `# 标题
 
-## Links
+## **市场定义与构成**
 
-- [Website](https://markmap.js.org/) 
-- [GitHub](https://github.com/gera2ld/markmap) 
+### 音视频会议按搭建方式分为自建式和托管式
 
-## Related Projects
+- 自建式:企业私有部署,安全稳定但成本高
 
-- [coc-markmap](https://github.com/gera2ld/coc-markmap) for Neovim
-- [markmap-vscode](https://marketplace.visualstudio.com/items?itemName=gera2ld.markmap-vscode) for VSCode
-- [eaf-markmap](https://github.com/emacs-eaf/eaf-markmap) for Emacs
+- 托管式:基于云端,成本低但安全稳定差
 
-## Features
+### 两种搭建方式下均需采买功能产品、终端设备和外显设备
 
-Note that if blocks and lists appear at the same level, the lists will be ignored.
+- 功能产品:自建式需视频会议系统,托管式需会议软件服务
 
-### Lists
+- 终端设备:如全向麦、会议摄像头
 
-- **strong** ~~del~~ *italic* ==highlight==
-- \`inline code\`
-- [x] checkbox
-- Katex: $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$ <!-- markmap: fold -->
-  - [More Katex Examples](#?d=gist:af76a4c245b302206b16aec503dbe07b:katex.md)
-- Now we can wrap very very very very long text based on \maxWidth\ option
+- 外显设备:如智能会议平板
 
-### Blocks
+## 市场规模
 
-\`\`\`js
-console.log('hello, JavaScript')
-\`\`\`
+### 历史发展阶段
 
-| Products | Price |
-|-|-|
-| Apple | 4 |
-| Banana | 2 |
+- 90年代以硬件为主的探索期
 
-![](https://work.beta.duiopen.com/static/img/favicon.ico)`
+- 软硬结合的高速发展期
 
+- 未来场景需求驱动的定制化期
+
+### 2021年市场规模约220亿元
+
+- 智能会议平板市场规模最大,约95亿元
+
+- 外设产品市场规模约130亿元,占比约59%
+
+### SMB企业市场规模超百亿
+
+- 智能会议平板和自建式系统市场规模最大
+
+## 发展趋势
+
+### 云视频会议和智能会议平板为增长主力
+
+- 云视频会议受疫情和灵活性驱动
+
+- 智能会议平板功能提升,但增速放缓
+
+### 自建式系统增长缓慢
+
+- 需大额投入,受云市场和经济因素影响
+
+### 未来发展趋势
+
+- 部署云端化、场景定制化、功能多元化、体验虚拟化
+
+## 竞争格局
+
+### 智能会议平板行业竞争加剧
+
+- 10-20家企业,潜在进入者超50家
+
+- CR3约50%,集中度高
+
+### 各大企业可分五类
+
+- 教育平板转型:先发优势
+
+- 显示器转型:供应链优势
+
+- PC转型:渠道优势
+
+- 会议系统转型:渠道和产品体验优势
+
+- LED转型:供应链优势
+
+## 渠道分析
+
+### 四大销售渠道
+
+- 直销:面向大客户
+
+- 电商:产品标准化
+
+- 集成商:提供解决方案
+
+- 经销商:直接销售产品
+
+### 以集成商和经销商为主
+
+- 可提供融资和售后等服务
+
+### 不同规模企业偏好不同
+
+- 大型企业偏向直销和集成商
+
+- 中小微型企业偏向经销商和电商
+
+## 用户需求分析
+
+### SMB企业数量占比99%
+
+- 经济实力较弱,业务复杂度低
+
+- 产品需求简单,服务要求低
+
+### 主要使用场景
+
+- 外部客户沟通:兼容多品牌云系统
+
+- 内部培训:高端会议摄像头
+
+- 内部协作:全向麦清晰、平板外显
+
+- 内部讨论:个人终端和智能平板
+
+### 智能会议平板需求
+
+- 20-50平米会议室需求最大
+
+- 价格区间1-2万元,Maxhub占比75%
+
+- 看重外显功能、尺寸、清晰度等
+
+- 也看重使用简便性、品牌知名度、服务支持度
+
+- 满意度较高,但传输能力可提升
+
+### 采购决策模式
+
+- 由高管决定:约60%
+
+- 由采购决定:约10%
+
+- 由技术决定:约20%
+
+- 全权技术决定:约10%
+
+## 建议
+
+### 会议系统策略
+
+- 发力外设,通过合作提升系统适配度
+
+### 外设产品与价格策略
+
+- 全向麦:极致性价比,重点降噪
+
+- 摄像头:重点变焦能力
+
+- 平板:外显性能,重点传输能力
+
+### 品牌推广策略
+
+- 发力经销商和电商渠道,口碑推广
+
+- 优先推广智能会议平板
+
+### 渠道与服务策略
+
+- 重点布局电商和经销商渠道
+
+- 建立厂商和经销商联动的服务体系
+
+`
+    const colorLoopArr=["#006AF8","#F76526","#00A85F","#894FE5"]
+    const colorArr=["#000000"]
+    for (let index = 0; index < 100; index++) {
+      colorArr.push(...colorLoopArr)
+    }
     window.draw=function draw(h, u = {
-      "colorFreezeLevel": 2
+      colorFreezeLevel: 2,
+      initialExpandLevel: 3,
+      spacingHorizontal: 50,
+      spacingVertical: 20,
+      color:colorArr,
     }) {
       const g = window.markmap;
       const {
@@ -115,9 +268,10 @@ console.log('hello, JavaScript')
         root,
         features
       } = transformer.transform(h)
-      console.info(root, features, 'root, features')
+      console.info(root, features, 'root, features',(g.deriveOptions)(u))
       if (window.mm) window.mm.destroy()
       window.mm = g.Markmap.create("svg#mindmap", (g.deriveOptions)(u), root)
+       
     }
     
     draw(data)
