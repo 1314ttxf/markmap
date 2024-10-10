@@ -379,7 +379,13 @@
     function deriveOptions(jsonOptions) {
       const derivedOptions = {};
       const options = { ...jsonOptions };
-      const { color, colorFreezeLevel } = options;
+      const { color, colorFreezeLevel,fontSize1='16px',fontSize2='16px',fontSize3='16px' } = options;
+      // fontSize1:,//一级标题字体大小
+      // fontSize2:'12px',//二级标题字体大小
+      // fontSize3:'12px',//内容字体大小
+      derivedOptions.fontSize1=fontSize1;
+      derivedOptions.fontSize2=fontSize2;
+      derivedOptions.fontSize3=fontSize3;
       if ((color == null ? void 0 : color.length) === 1) {
         const solidColor = color[0];
         derivedOptions.color = () => solidColor;
@@ -1185,8 +1191,13 @@
         this.options = defaultOptions;
         this.revokers = [];
         this.imgCache = {};
+        this.fontSize1=opts.fontSize1
+        this.fontSize2=opts.fontSize2
+        this.fontSize3=opts.fontSize3
+        this.initZoom=false //初次是否自适应缩放
         this.handleZoom = (e) => {
           const { transform } = e;
+          if(!this.initZoom) transform.k=1
           this.g.attr("transform", transform);
         };
         this.handlePan = (e) => {
@@ -1281,13 +1292,14 @@
           depth += 1;
           item.children = (_a = item.children) == null ? void 0 : _a.map((child) => ({ ...child }));
           nodeId += 1;
+          const fontSize=depth==1?this.fontSize1:depth==2?this.fontSize2:this.fontSize3
           const group = mountDom(
             /* @__PURE__ */ jsx(
               "div",
               {
                 className: "markmap-foreign markmap-foreign-testing-max",
                 style: groupStyle,
-                children: /* @__PURE__ */ jsx("div", { dangerouslySetInnerHTML: { __html: item.content } })
+                children: /* @__PURE__ */ jsx("div", { dangerouslySetInnerHTML: { __html: item.content },style:"font-size:"+fontSize })
               }
             )
           );
@@ -1373,6 +1385,7 @@
         }
       }
       setData(data, opts) {
+        this.initZoom=false;
         if (opts)
           this.setOptions(opts);
         if (data)
@@ -1382,6 +1395,9 @@
         this.initializeData(this.state.data);
         this.updateStyle();
         this.renderData();
+        setTimeout(()=>{
+          this.initZoom=true;
+        },1000)
       }
       renderData(originData) {
         if (!this.state.data)
@@ -1489,7 +1505,24 @@
               const clone = d.data.state.el.cloneNode(true);
               this.replaceWith(clone);
               return clone;
-            }).attr("xmlns", "http://www.w3.org/1999/xhtml").attr("style", (d) =>`color:${color(d.data)}`);
+            }).attr("xmlns", "http://www.w3.org/1999/xhtml").attr("style", (d) => {
+              let style = `color: ${d.data.state.depth > 1000 ? color(d.data) : '#333333'};`;
+              // if (d.data.state.depth <3) {
+              //   style += `font-weight: bold;`;
+              // }
+              if (d.data.state.depth ==1) {
+                style += "font-size:"+this.fontSize1+";";
+                style += `font-weight: bold;`;
+              }
+              if (d.data.state.depth ==2) {
+                style += "font-size:"+this.fontSize2+";";
+                style += `font-weight: 545;`;
+              }
+              if (d.data.state.depth >2) {
+                style += "font-size:"+this.fontSize3+";";
+              }
+              return style;
+            })
             return fo;
           },
           (update) => update,
